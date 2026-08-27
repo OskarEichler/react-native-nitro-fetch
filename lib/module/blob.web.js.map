@@ -1,0 +1,1 @@
+{"version":3,"names":["bytesToBlob","bytes","type","Blob"],"sourceRoot":"../../src","sources":["blob.web.ts"],"mappings":";;AAAA;AACA;AACA;AACA;AACA;AACA,OAAO,SAASA,WAAWA,CAACC,KAAkB,EAAEC,IAAY,EAAQ;EAClE,OAAO,IAAIC,IAAI,CAAC,CAACF,KAAK,CAAC,EAAE;IAAEC;EAAK,CAAC,CAAC;AACpC","ignoreList":[]}
