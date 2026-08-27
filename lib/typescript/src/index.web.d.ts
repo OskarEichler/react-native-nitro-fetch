@@ -1,4 +1,7 @@
 import type { RequestRedirect, RequestCache } from './Request';
+import type { TokenRefreshConfig } from './tokenRefreshConfig';
+export type { TokenRefreshConfig } from './tokenRefreshConfig';
+export { getNestedField, applyTemplate } from './tokenRefreshConfig';
 export { NitroHeaders as Headers } from './Headers';
 export { NitroResponse as Response } from './Response';
 export { NitroRequest as Request } from './Request';
@@ -11,23 +14,6 @@ export { profileFetch } from './HermesProfiler';
 export type { ProfileResult } from './HermesProfiler';
 export type { NitroFormDataPart } from './NitroFetch.nitro';
 export type { NitroRequest as NitroRequest, NitroResponse as NitroResponse, } from './NitroFetch.nitro';
-export type TokenRefreshConfig = {
-    url: string;
-    method?: 'GET' | 'POST' | 'PUT' | 'PATCH';
-    headers?: Record<string, string>;
-    body?: string;
-    responseType?: 'json' | 'text';
-    mappings?: {
-        jsonPath: string;
-        header: string;
-        valueTemplate?: string;
-    }[];
-    compositeHeaders?: {
-        header: string;
-        template: string;
-        paths: Record<string, string>;
-    }[];
-};
 export declare function fetch(input: RequestInfo | URL, init?: RequestInit & {
     /**
      * Accepted for parity with the native build and ignored on web — the
@@ -72,6 +58,4 @@ export declare function registerTokenRefresh(_options: {
 export declare function clearTokenRefresh(_target?: 'websocket' | 'fetch' | 'all'): void;
 export declare function callRefreshEndpoint(_config: TokenRefreshConfig): Promise<Record<string, string>>;
 export declare function getStoredTokenRefreshConfig(_target: 'websocket' | 'fetch'): TokenRefreshConfig | null;
-export declare function getNestedField(obj: unknown, dotPath: string): string | undefined;
-export declare function applyTemplate(template: string, value: string): string;
 //# sourceMappingURL=index.web.d.ts.map

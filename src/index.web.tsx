@@ -5,6 +5,9 @@
 import { platformFetch } from './platformFetch';
 import { utf8ToString } from './utf8';
 import type { RequestRedirect, RequestCache } from './Request';
+import type { TokenRefreshConfig } from './tokenRefreshConfig';
+export type { TokenRefreshConfig } from './tokenRefreshConfig';
+export { getNestedField, applyTemplate } from './tokenRefreshConfig';
 
 export { NitroHeaders as Headers } from './Headers';
 export { NitroResponse as Response } from './Response';
@@ -29,24 +32,6 @@ export type {
   NitroRequest as NitroRequest,
   NitroResponse as NitroResponse,
 } from './NitroFetch.nitro';
-
-export type TokenRefreshConfig = {
-  url: string;
-  method?: 'GET' | 'POST' | 'PUT' | 'PATCH';
-  headers?: Record<string, string>;
-  body?: string;
-  responseType?: 'json' | 'text';
-  mappings?: {
-    jsonPath: string;
-    header: string;
-    valueTemplate?: string;
-  }[];
-  compositeHeaders?: {
-    header: string;
-    template: string;
-    paths: Record<string, string>;
-  }[];
-};
 
 export async function fetch(
   input: RequestInfo | URL,
@@ -164,21 +149,4 @@ export function getStoredTokenRefreshConfig(
 ): TokenRefreshConfig | null {
   console.warn('getStoredTokenRefreshConfig is not available on web');
   return null;
-}
-
-export function getNestedField(
-  obj: unknown,
-  dotPath: string
-): string | undefined {
-  const parts = dotPath.split('.');
-  let current: unknown = obj;
-  for (const part of parts) {
-    if (current == null || typeof current !== 'object') return undefined;
-    current = (current as Record<string, unknown>)[part];
-  }
-  return current != null ? String(current) : undefined;
-}
-
-export function applyTemplate(template: string, value: string): string {
-  return template.replace(/\{\{value\}\}/g, () => value);
 }
